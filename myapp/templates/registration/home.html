@@ -1,0 +1,9 @@
+{%extends 'registration/base.html'%}
+{%block title%}Home{% endblock %}
+{% block content %}
+    <h3>Home Page</h3>
+  
+    {% if user.is_authenticated %}
+    <b ><a href="{% url 'logout' %}">Logout</a></b>
+    {% endif %}
+{%endblock%}

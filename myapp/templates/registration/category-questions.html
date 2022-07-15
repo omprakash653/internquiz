@@ -1,0 +1,53 @@
+{%extends 'registration/base.html'%}
+{%if msg%}
+<h5>{{msg}}</h5>
+{% endif %}
+{%block title%}{{category.title}} Questions{% endblock %}
+{% block content %}
+
+<h3 "my-4">{{category.title}} Questions</h3>
+
+<div class="card my-4 border-primary">
+    <h4 class="card-header border-primary">{{question.question}}?</h4>
+    <form method="post" action="{%url 'submit_answer' category.id question.id%}">
+        {% csrf_token %}
+    <div class="card-body">
+        <table class="table table-boardered">
+            <tr>
+                <td><input value= "{{question.opt_1}}"id="option_1" name="answer" type="radio"></td>
+                <th><label for="option_1">{{question.option_1}}</label></th>
+            </tr>
+            <tr>
+                <td><input value= "{{question.opt_2}}"id="option_2"name="answer"  type="radio"></td>
+                <th><label for="option_2">{{question.option_2}}</label></th>
+            </tr>
+            <tr>
+                <td><input value= "{{question.opt_3}}"id="option_3" name="answer" type="radio"></td>
+                <th><label for="option_3">{{question.option_3}}</label></th>
+            </tr> 
+            <tr>
+                <td><input value= "{{question.opt_4}}"id="option_4" name="answer" type="radio"></td>
+                <th><label for="option_4">{{question.option_4}}</label></th>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer">
+        <input type="submit" name="skip" value="skip" class="btn btn-danger" /> <!--skipBtn-->
+        <input type="submit" name="submit" value="submit" class="btn btn-primary" /><!--submitBtn-->
+    </div>
+</form>
+</div> 
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".submitBtn").on('click',function(){
+            var _checkedAns=$("input[name='answer']:checked").val();
+            if(_checkedAns==undefined){
+                alert('Please select option');
+                return false;
+            }
+        });
+    });
+</script> 
+
+{%endblock%} 
